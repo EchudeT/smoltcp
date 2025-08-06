@@ -188,8 +188,8 @@ impl Interface {
     /// # Panics
     /// This function panics if the [`Config::hardware_address`] does not match
     /// the medium of the device.
-    pub fn new(config: Config, device: &mut (impl Device + ?Sized), now: Instant) -> Self {
-        let caps = device.capabilities();
+    pub fn new(config: Config, now: Instant, caps: DeviceCapabilities) -> Self {
+        // let caps = device.capabilities();
         assert_eq!(
             config.hardware_addr.medium(),
             caps.medium,
