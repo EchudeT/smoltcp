@@ -48,6 +48,9 @@ use crate::time::{Duration, Instant};
 
 use crate::wire::*;
 
+extern crate alloc;
+use alloc::boxed::Box;
+
 macro_rules! check {
     ($e:expr) => {
         match $e {
