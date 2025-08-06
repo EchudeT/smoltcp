@@ -203,6 +203,7 @@ impl Checksum {
 #[derive(Debug, Clone, Default)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 #[non_exhaustive]
+#[repr(C, align(8))]
 pub struct ChecksumCapabilities {
     pub ipv4: Checksum,
     pub udp: Checksum,
@@ -236,6 +237,7 @@ impl ChecksumCapabilities {
 #[derive(Debug, Clone, Default)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 #[non_exhaustive]
+#[repr(C, align(8))]
 pub struct DeviceCapabilities {
     /// Medium of the device.
     ///
@@ -292,6 +294,7 @@ impl DeviceCapabilities {
 /// Type of medium of a device.
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
+#[repr(C, align(8))]
 pub enum Medium {
     /// Ethernet medium. Devices of this type send and receive Ethernet frames,
     /// and interfaces using it must do neighbor discovery via ARP or NDISC.
