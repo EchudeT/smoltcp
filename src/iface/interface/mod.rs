@@ -188,7 +188,7 @@ impl Interface {
     /// # Panics
     /// This function panics if the [`Config::hardware_address`] does not match
     /// the medium of the device.
-    pub fn new(config: Config, now: Instant, caps: DeviceCapabilities) -> Self {
+    pub fn new(config: Config, now: Instant, caps: DeviceCapabilities) -> Box<Self> {
         // let caps = device.capabilities();
         assert_eq!(
             config.hardware_addr.medium(),
@@ -230,7 +230,7 @@ impl Interface {
             }
         }
 
-        Interface {
+        let iface = Interface {
             fragments: FragmentsBuffer {
                 #[cfg(feature = "proto-sixlowpan")]
                 decompress_buf: [0u8; sixlowpan::MAX_DECOMPRESSED_LEN],
@@ -264,7 +264,8 @@ impl Interface {
                 sixlowpan_address_context: Vec::new(),
                 rand,
             },
-        }
+        };
+        Box::new(iface)
     }
 
     /// Get the socket context.
